@@ -1,3 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Nuestro chat 💬</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  background:#0b141a;
+  font-family:'Poppins', sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+}
+
+.phone{
+  width:360px;
+  height:640px;
+  background:#111b21;
+  border-radius:35px;
+  box-shadow:0 0 40px rgba(0,0,0,0.6);
+  overflow:hidden;
+  position:relative;
+}
+
+.header{
+  background:#202c33;
+  color:white;
+  padding:15px;
+  font-size:18px;
+}
+
+.chat{
+  padding:15px;
+  height:480px;
+  overflow-y:auto;
+}
+
+.msg{
+  padding:10px 15px;
+  border-radius:15px;
+  margin:10px 0;
+  max-width:75%;
+  animation:fade 0.5s ease;
+}
+@keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1}}
+
+.yo{
+  background:#005c4b;
+  color:white;
+  margin-left:auto;
+}
+
+.btnArea{
+  position:absolute;
+  bottom:20px;
+  width:100%;
+  text-align:center;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#25d366;
+  color:white;
+  font-size:16px;
+}
+
+video{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+}
+
+/* animacion corazones */
+@keyframes caer{
+  0%{transform:translateY(-10vh);opacity:1}
+  100%{transform:translateY(110vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<video id="video" loop playsinline>
+  <source src="https://raw.githubusercontent.com/duvanorlandoburgoscordoba123-hash/Sorpresa./5ff4a88c2d22c549c1116d0dd1a855ab248091a5/eb2c0940c76e0b8a96065f4f27d1b4a2.mp4" type="video/mp4">
+</video>
+
+<div class="phone" id="app">
+  <div class="header">💬 Tú & Yo</div>
+  <div class="chat" id="chat"></div>
+  <div class="btnArea">
+    <button onclick="siguiente()">Enviar mensaje 💌</button>
+  </div>
+</div>
+
 <script>
 let videoIniciado=false;
 
@@ -46,34 +152,61 @@ function siguiente(){
   }
 }
 
+/* lluvia corazones */
+function lluviaCorazones(){
+  setInterval(()=>{
+    let c=document.createElement("div");
+    c.innerHTML="💖";
+    c.style.position="fixed";
+    c.style.top="-20px";
+    c.style.left=Math.random()*100+"vw";
+    c.style.fontSize=(20+Math.random()*30)+"px";
+    c.style.animation="caer 5s linear";
+    document.body.appendChild(c);
+    setTimeout(()=>{c.remove()},5000);
+  },300);
+}
+
+/* POEMA BENEDETTI */
 function poemaBenedetti(){
 document.body.innerHTML=`
 <video autoplay loop style="position:fixed;width:100%;height:100%;object-fit:cover">
 <source src="https://raw.githubusercontent.com/duvanorlandoburgoscordoba123-hash/Sorpresa./5ff4a88c2d22c549c1116d0dd1a855ab248091a5/eb2c0940c76e0b8a96065f4f27d1b4a2.mp4" type="video/mp4">
 </video>
 
-<div style="position:absolute;color:white;text-align:center;padding:40px;margin-top:20vh;font-size:28px">
-No te rindas, aún estás a tiempo<br><br>
-de alcanzar y comenzar de nuevo,<br>
-aceptar tus sombras,<br>
-enterrar tus miedos,<br>
-liberar el lastre,<br>
-retomar el vuelo.<br><br>
-<h2>— Mario Benedetti 💕</h2>
+<div style="position:absolute;color:white;text-align:center;padding:40px;margin-top:15vh;font-size:30px">
+Mi táctica es mirarte,<br>
+aprender como eres,<br>
+quererte como eres.<br><br>
+Mi táctica es hablarte y escucharte,<br>
+construir con palabras<br>
+un puente indestructible.<br><br>
+Mi táctica es quedarme en tu recuerdo…<br>
+pero quedarme en ti 💕<br><br>
+<h2>— Mario Benedetti</h2>
 </div>`;
+lluviaCorazones();
 }
 
+/* POEMA NERUDA */
 function poemaNeruda(){
 document.body.innerHTML=`
 <video autoplay loop style="position:fixed;width:100%;height:100%;object-fit:cover">
 <source src="https://raw.githubusercontent.com/duvanorlandoburgoscordoba123-hash/Sorpresa./5ff4a88c2d22c549c1116d0dd1a855ab248091a5/eb2c0940c76e0b8a96065f4f27d1b4a2.mp4" type="video/mp4">
 </video>
 
-<div style="position:absolute;color:white;text-align:center;padding:40px;margin-top:20vh;font-size:28px">
-Te amo sin saber cómo, ni cuándo, ni de dónde.<br><br>
-Te amo directamente sin problemas ni orgullo:<br>
-así te amo porque no sé amar de otra manera.<br><br>
-<h2>— Pablo Neruda ❤️</h2>
+<div style="position:absolute;color:white;text-align:center;padding:40px;margin-top:15vh;font-size:30px">
+Quiero hacer contigo<br>
+lo que la primavera hace con los cerezos 🌸<br><br>
+Quiero llenar tu risa de besos,<br>
+tu vida de aventuras,<br>
+y tus días de abrazos infinitos.<br><br>
+Eres la casualidad más bonita de mi vida ❤️<br><br>
+<h2>— Pablo Neruda</h2>
 </div>`;
+lluviaCorazones();
 }
 </script>
+
+</body>
+</html>
