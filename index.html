@@ -70,6 +70,7 @@ button{
   background:#25d366;
   color:white;
   font-size:16px;
+  cursor:pointer;
 }
 
 video{
@@ -82,7 +83,6 @@ video{
   display:none;
 }
 
-/* animacion corazones */
 @keyframes caer{
   0%{transform:translateY(-10vh);opacity:1}
   100%{transform:translateY(110vh);opacity:0}
@@ -130,7 +130,6 @@ function agregarMensaje(texto){
 }
 
 function siguiente(){
-
   if(!videoIniciado){
     let v=document.getElementById("video");
     v.style.display="block";
@@ -148,11 +147,11 @@ function siguiente(){
     "<div style='color:white;text-align:center;margin-top:180px'>" +
     "<h1>💖</h1><h2>¿Quieres salir conmigo?</h2>" +
     "<br><button onclick='poemaBenedetti()'>SI 💕</button>" +
-    "<br><br><button onclick='poemaNeruda()'>OBVIO SI 😍</button></div>";
+    "<br><br><button onclick='poemaNeruda()'>OBVIO SI 😍</button>" +
+    "<br><br><button onclick='poemaNo()'>NO 😳</button></div>";
   }
 }
 
-/* lluvia corazones */
 function lluviaCorazones(){
   setInterval(()=>{
     let c=document.createElement("div");
@@ -167,7 +166,7 @@ function lluviaCorazones(){
   },300);
 }
 
-/* POEMA BENEDETTI */
+/* BENDETTI */
 function poemaBenedetti(){
 document.body.innerHTML=`
 <video autoplay loop style="position:fixed;width:100%;height:100%;object-fit:cover">
@@ -179,8 +178,7 @@ Mi táctica es mirarte,<br>
 aprender como eres,<br>
 quererte como eres.<br><br>
 Mi táctica es hablarte y escucharte,<br>
-construir con palabras<br>
-un puente indestructible.<br><br>
+construir con palabras un puente indestructible.<br><br>
 Mi táctica es quedarme en tu recuerdo…<br>
 pero quedarme en ti 💕<br><br>
 <h2>— Mario Benedetti</h2>
@@ -188,7 +186,7 @@ pero quedarme en ti 💕<br><br>
 lluviaCorazones();
 }
 
-/* POEMA NERUDA */
+/* NERUDA */
 function poemaNeruda(){
 document.body.innerHTML=`
 <video autoplay loop style="position:fixed;width:100%;height:100%;object-fit:cover">
@@ -196,13 +194,29 @@ document.body.innerHTML=`
 </video>
 
 <div style="position:absolute;color:white;text-align:center;padding:40px;margin-top:15vh;font-size:30px">
-Quiero hacer contigo<br>
-lo que la primavera hace con los cerezos 🌸<br><br>
+Quiero hacer contigo lo que la primavera hace con los cerezos 🌸<br><br>
 Quiero llenar tu risa de besos,<br>
 tu vida de aventuras,<br>
 y tus días de abrazos infinitos.<br><br>
 Eres la casualidad más bonita de mi vida ❤️<br><br>
 <h2>— Pablo Neruda</h2>
+</div>`;
+lluviaCorazones();
+}
+
+/* NO */
+function poemaNo(){
+document.body.innerHTML=`
+<video autoplay loop style="position:fixed;width:100%;height:100%;object-fit:cover">
+<source src="https://raw.githubusercontent.com/duvanorlandoburgoscordoba123-hash/Sorpresa./5ff4a88c2d22c549c1116d0dd1a855ab248091a5/eb2c0940c76e0b8a96065f4f27d1b4a2.mp4" type="video/mp4">
+</video>
+
+<div style="position:absolute;color:white;text-align:center;padding:40px;margin-top:15vh;font-size:30px">
+Entonces déjame intentarlo otra vez 💫<br><br>
+Porque eres mi casualidad más bonita,<br>
+la historia que no planeé pero que quiero vivir ❤️<br><br>
+Fue el tiempo que pasaste con tu rosa lo que la hizo importante 🌹<br><br>
+<h2>— Antoine de Saint-Exupéry</h2>
 </div>`;
 lluviaCorazones();
 }
