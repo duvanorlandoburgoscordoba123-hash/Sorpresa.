@@ -18,22 +18,6 @@ body{
   overflow:hidden;
 }
 
-/* fondo burbujas */
-body::before{
-  content:"";
-  position:absolute;
-  width:200%;
-  height:200%;
-  background:url("https://i.imgur.com/YKY28eT.png");
-  animation:mover 60s linear infinite;
-  opacity:0.15;
-}
-@keyframes mover{
-  from{transform:translate(0,0);}
-  to{transform:translate(-50%,-50%);}
-}
-
-/* telefono */
 .phone{
   width:360px;
   height:640px;
@@ -87,26 +71,27 @@ button{
   color:white;
   font-size:16px;
 }
-.heart{
+
+video{
   position:fixed;
-  bottom:-20px;
-  font-size:22px;
-  animation:subir 6s linear infinite;
-}
-@keyframes subir{
-  0%{transform:translateY(0)}
-  100%{transform:translateY(-110vh)}
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="musica" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
-</audio>
+<!-- VIDEO CON SONIDO -->
+<video id="video" loop>
+  <source src="4ba1b517f1738a089eb6b9115b58477b.mp4" type="video/mp4">
+</video>
 
-<div class="phone">
+<div class="phone" id="app">
   <div class="header">💬 Tú & Yo</div>
   <div class="chat" id="chat"></div>
   <div class="btnArea">
@@ -115,13 +100,13 @@ button{
 </div>
 
 <script>
-let musica=false;
+let videoIniciado=false;
 
 let mensajes=[
 "Hola 😊",
 "Quería decirte algo...",
-"Pero no sabía cómo hacerlo 🙈",
-"Así que decidí crear esto para ti 💻",
+"No sabía cómo hacerlo 🙈",
+"Así que hice esta web para ti 💻",
 "Porque eres muy especial ✨",
 "Me encanta hablar contigo 💕",
 "Tu sonrisa alegra mis días ☀️",
@@ -141,16 +126,18 @@ function agregarMensaje(texto){
 
 function siguiente(){
 
-  if(!musica){
-    document.getElementById("musica").play();
-    musica=true;
+  if(!videoIniciado){
+    let v=document.getElementById("video");
+    v.style.display="block";
+    v.play();
+    videoIniciado=true;
   }
 
   if(i<mensajes.length){
     agregarMensaje(mensajes[i]);
     i++;
   }else{
-    document.querySelector(".phone").innerHTML=
+    document.getElementById("app").innerHTML=
     "<div style='color:white;text-align:center;margin-top:200px'>" +
     "<h1>💖</h1><h2>¿Quieres salir conmigo?</h2>" +
     "<br><button onclick='final()'>SI 💕</button>" +
@@ -161,15 +148,6 @@ function siguiente(){
 function final(){
   document.body.innerHTML="<h1 style='color:white;text-align:center;margin-top:40vh'>Sabía que dirías que sí 😍</h1>";
 }
-
-setInterval(()=>{
-  let heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="💖";
-  heart.style.left=Math.random()*100+"vw";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
-},300);
 </script>
 
 </body>
