@@ -86,9 +86,8 @@ video{
 
 <body>
 
-<!-- VIDEO CON SONIDO -->
-<video id="video" loop>
-  <source src="4ba1b517f1738a089eb6b9115b58477b.mp4" type="video/mp4">
+<video id="video" loop playsinline>
+  <source src="https://raw.githubusercontent.com/duvanorlandoburgoscordoba123-hash/Sorpresa./5ff4a88c2d22c549c1116d0dd1a855ab248091a5/eb2c0940c76e0b8a96065f4f27d1b4a2.mp4" type="video/mp4">
 </video>
 
 <div class="phone" id="app">
@@ -129,6 +128,7 @@ function siguiente(){
   if(!videoIniciado){
     let v=document.getElementById("video");
     v.style.display="block";
+    v.muted=false;
     v.play();
     videoIniciado=true;
   }
