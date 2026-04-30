@@ -2,128 +2,171 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Para ti ❤️</title>
+<title>Nuestro chat 💬</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
+  background:#0b141a;
   font-family:'Poppins', sans-serif;
-  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background: linear-gradient(120deg,#ff758c,#ff7eb3,#ffc3a0);
+  height:100vh;
   overflow:hidden;
 }
 
-/* Fondo partículas */
+/* fondo burbujas */
 body::before{
   content:"";
   position:absolute;
   width:200%;
   height:200%;
   background:url("https://i.imgur.com/YKY28eT.png");
-  animation: sparkle 60s linear infinite;
-  opacity:0.4;
+  animation:mover 60s linear infinite;
+  opacity:0.15;
 }
-@keyframes sparkle{
+@keyframes mover{
   from{transform:translate(0,0);}
   to{transform:translate(-50%,-50%);}
 }
 
-/* Tarjeta */
-.card{
+/* telefono */
+.phone{
+  width:360px;
+  height:640px;
+  background:#111b21;
+  border-radius:35px;
+  box-shadow:0 0 40px rgba(0,0,0,0.6);
+  overflow:hidden;
   position:relative;
-  background:rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  padding:40px;
-  border-radius:25px;
-  text-align:center;
-  width:85%;
-  max-width:400px;
-  box-shadow:0 0 40px rgba(0,0,0,0.2);
-  color:white;
 }
 
-h1{font-size:38px;margin:0;}
-p{font-size:20px;}
+.header{
+  background:#202c33;
+  color:white;
+  padding:15px;
+  font-size:18px;
+}
 
-#mensaje{
-  min-height:60px;
-  margin-top:25px;
-  font-size:22px;
+.chat{
+  padding:15px;
+  height:480px;
+  overflow-y:auto;
+}
+
+.msg{
+  padding:10px 15px;
+  border-radius:15px;
+  margin:10px 0;
+  max-width:75%;
+  animation:fade 0.5s ease;
+}
+@keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1}}
+
+.yo{
+  background:#005c4b;
+  color:white;
+  margin-left:auto;
+}
+
+.btnArea{
+  position:absolute;
+  bottom:20px;
+  width:100%;
+  text-align:center;
 }
 
 button{
-  margin-top:25px;
-  padding:15px 35px;
-  font-size:20px;
+  padding:12px 25px;
   border:none;
-  border-radius:30px;
-  background:white;
-  color:#ff4d6d;
-  font-weight:bold;
-  box-shadow:0 0 20px rgba(255,255,255,0.6);
+  border-radius:25px;
+  background:#25d366;
+  color:white;
+  font-size:16px;
 }
-
-/* corazones */
 .heart{
   position:fixed;
   bottom:-20px;
-  font-size:25px;
-  animation: subir 6s linear infinite;
+  font-size:22px;
+  animation:subir 6s linear infinite;
 }
 @keyframes subir{
-  0%{transform:translateY(0) scale(1);}
-  100%{transform:translateY(-110vh) scale(1.5);}
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-110vh)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- Música -->
-<audio autoplay loop>
+<audio id="musica" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
 </audio>
 
-<div class="card">
-  <h1>Hola hermosa 💖</h1>
-  <p>Tengo algo que decirte...</p>
-  <div id="mensaje"></div>
-  <button onclick="siguiente()">Toca aquí 💌</button>
+<div class="phone">
+  <div class="header">💬 Tú & Yo</div>
+  <div class="chat" id="chat"></div>
+  <div class="btnArea">
+    <button onclick="siguiente()">Enviar mensaje 💌</button>
+  </div>
 </div>
 
 <script>
-let mensajes = [
-"Desde que llegaste todo es más bonito ✨",
+let musica=false;
+
+let mensajes=[
+"Hola 😊",
+"Quería decirte algo...",
+"Pero no sabía cómo hacerlo 🙈",
+"Así que decidí crear esto para ti 💻",
+"Porque eres muy especial ✨",
 "Me encanta hablar contigo 💕",
-"Tu sonrisa ilumina mis días ☀️",
-"Eres alguien muy especial 🌸",
-"Y quería que supieras algo...",
-"Me gustas muchísimo ❤️"
+"Tu sonrisa alegra mis días ☀️",
+"Y cada día me gustas más...",
+"Así que quería preguntarte algo..."
 ];
 
 let i=0;
+
+function agregarMensaje(texto){
+  let div=document.createElement("div");
+  div.className="msg yo";
+  div.innerHTML=texto;
+  document.getElementById("chat").appendChild(div);
+  document.getElementById("chat").scrollTop=9999;
+}
+
 function siguiente(){
-  if(i < mensajes.length){
-    document.getElementById("mensaje").innerHTML = mensajes[i];
+
+  if(!musica){
+    document.getElementById("musica").play();
+    musica=true;
+  }
+
+  if(i<mensajes.length){
+    agregarMensaje(mensajes[i]);
     i++;
   }else{
-    document.querySelector(".card").innerHTML =
-    "<h1>💖</h1><h2>¿Quieres salir conmigo?</h2>";
+    document.querySelector(".phone").innerHTML=
+    "<div style='color:white;text-align:center;margin-top:200px'>" +
+    "<h1>💖</h1><h2>¿Quieres salir conmigo?</h2>" +
+    "<br><button onclick='final()'>SI 💕</button>" +
+    "<br><br><button onclick='final()'>OBVIO SI 😍</button></div>";
   }
 }
 
-/* corazones flotando */
+function final(){
+  document.body.innerHTML="<h1 style='color:white;text-align:center;margin-top:40vh'>Sabía que dirías que sí 😍</h1>";
+}
+
 setInterval(()=>{
   let heart=document.createElement("div");
   heart.className="heart";
   heart.innerHTML="💖";
   heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=(20+Math.random()*30)+"px";
   document.body.appendChild(heart);
   setTimeout(()=>heart.remove(),6000);
 },300);
